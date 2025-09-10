@@ -124,3 +124,39 @@ document.addEventListener("DOMContentLoaded", function () {
   //Exibe todos os itens logo no início
   aplicarFiltro("todos");
 });
+
+//Pesquisa por texto
+const inputPesquisar = document.getElementById("pesquisar");
+
+if (inputPesquisar) {
+  inputPesquisar.addEventListener("input", function () {
+    const palavraDigitada = this.value.toLowerCase();
+
+    //Filtra os filmes
+    filmesCards.forEach((card, index) => {
+      const titulo = dados.filmes[index].titulo.toLowerCase();
+      card.style.display = titulo.includes(palavraDigitada) ? "block" : "none";
+    });
+
+    //Filtra os series
+    seriesCards.forEach((card, index) => {
+      const titulo = dados.series[index].titulo.toLowerCase();
+      card.style.display = titulo.includes(palavraDigitada) ? "block" : "none";
+    });
+
+    //Se está pesquisando por texto, o filtro gênero volta para "Todos"
+    if (selectGenero) selectGenero.selectedIndex = 0;
+  });
+}
+
+//MENU MOBILE
+const btnMenu = document.getElementById("menu-btn");
+const menuMobile = document.getElementById("menu-mobile");
+
+if (btnMenu && menuMobile) {
+  btnMenu.addEventListener("click", () => {
+    //Alterar a exibição do menu (abre e fecha)
+    menuMobile.style.display =
+      menuMobile.style.display === "flex" ? "nome" : "flex";
+  });
+}
